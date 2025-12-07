@@ -14,7 +14,7 @@ if ($conn->connect_error) die("Database connection failed: " . $conn->connect_er
 
 // --- IMAGE UPLOAD HANDLER ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
-    $upload_dir = __DIR__ . '/admin/uploads/'; // server path to uploads
+    $upload_dir = __DIR__ . '/admin/uploads/';
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
 
     $file = $_FILES['image'];
@@ -30,13 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             $stmt = $conn->prepare("INSERT INTO watches (name, price, description, image) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sdss", $name, $price, $description, $new_name);
             $stmt->execute();
-        } else {
-            echo "Failed to move uploaded file.";
         }
-    } else {
-        echo "Upload error code: " . $file['error'];
     }
 }
+
 // --- GET ACTIVE SALE ---
 $active_sale_query = "SELECT * FROM sales WHERE status='active' LIMIT 1";
 $active_sale_result = $conn->query($active_sale_query);
@@ -47,20 +44,17 @@ $watches_query = "SELECT * FROM watches";
 $watches_result = $conn->query($watches_query);
 
 $watches = [];
-$upload_base_url = "https://wristwin.shop/admin/"; // Correct URL
+$upload_base_url = "https://wristwin.shop/admin/";
 
 if ($watches_result && $watches_result->num_rows > 0) {
     while ($row = $watches_result->fetch_assoc()) {
 
-        // --- Image Handling (ONLY FIXED PART) ---
         if (!empty($row['image'])) {
-            // Do NOT modify or rename image — use exactly what is saved in DB
             $row['image'] = $upload_base_url . $row['image'];
         } else {
             $row['image'] = $upload_base_url . "default.png";
         }
 
-        // --- Discount Handling ---
         if ($active_sale && isset($active_sale['discount_percent'])) {
             $discount = $active_sale['discount_percent'];
             $row['discounted_price'] = round($row['price'] * (1 - $discount / 100), 2);
@@ -85,6 +79,7 @@ $conn->close();
 <title>Wrist Win Watches - Home</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="static/styling/user_styling/home.css">
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 </head>
 <body>
 
@@ -115,15 +110,15 @@ $conn->close();
 <!-- Products Section -->
 <div class="home-header">
     <h1>Selling Products</h1>
-</div>
 
-<section class="products">
     <?php if ($active_sale && isset($active_sale['sale_name'], $active_sale['discount_percent'])): ?>
         <h2 class="gradient-text">
             🔥 <?= htmlspecialchars($active_sale['sale_name']) ?> - <?= htmlspecialchars($active_sale['discount_percent']) ?>% OFF!
         </h2>
     <?php endif; ?>
+</div>
 
+<section class="products">
     <div class="product-grid">
         <?php if (count($watches) > 0): ?>
             <?php foreach($watches as $watch): ?>
@@ -176,6 +171,7 @@ $conn->close();
             <a href="https://www.instagram.com/wristwin" target="_blank" style="color:#E1306C;"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="https://www.facebook.com/share/1ANaokHvx8/?mibextid=wwXIfr" target="_blank" style="color:#1877F2;"><i class="fab fa-facebook"></i> Facebook</a>
             <a href="https://www.tiktok.com/@wristwin" target="_blank" style="color:#ffffff;"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
     <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>

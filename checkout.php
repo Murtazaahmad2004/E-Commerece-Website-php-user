@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ✅ Begin transaction
     $conn->begin_transaction();
     try {
+
         // ✅ Update stock
         foreach ($items as $item) {
             $stmt = $conn->prepare("SELECT id, stock FROM watches WHERE name = ?");
@@ -84,13 +85,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ");
         $items_json_encoded = json_encode($items);
         $insert_stmt->bind_param(
-            "sssssssssss", 
+            "sssssssssss",
             $name, $email, $phone, $country, $city, $postal, $address, $total, $payment_method, $items_json_encoded, $sale_status
         );
         $insert_stmt->execute();
 
+
+        // -----------------------------------
+        // ✅ ADMIN NOTIFICATION SECTION
+        // -----------------------------------
+
+        $admin_phone = "923231508088"; 
+        $admin_email = "businessinfo.pk47@gmail.com";
+
+        // Convert items into text
+        $item_text = "";
+        foreach ($items as $it) {
+            $item_text .= $it['name'] . " (x" . $it['quantity'] . ") - Rs " . $it['display_price'] . "\n";
+        }
+
+        // WhatsApp Admin Message
+        $whatsapp_message = urlencode(
+"📦 *New Order Received!*
+
+👤 Name: $name
+📞 Phone: $phone
+📧 Email: $email
+📍 Address: $address, $city, $country
+
+🛒 *Order Items:*
+$item_text
+
+💰 *Total:* Rs $total
+🏷 Payment: Cash on Delivery
+🔥 Sale Status: $sale_status
+
+Please confirm the order."
+        );
+
+        $whatsapp_url = "https://wa.me/$admin_phone?text=$whatsapp_message";
+
+        // Email Notification
+        $subject = "New Order Received - Wrist Win Watches";
+        $email_body = "
+A new order has been placed.
+
+Customer Details:
+----------------------
+Name: $name
+Email: $email
+Phone: $phone
+City: $city
+Country: $country
+Address: $address
+
+Order Items:
+----------------------
+$item_text
+
+Total Amount: Rs $total
+Payment Method: Cash on Delivery
+Sale Status: $sale_status
+";
+
+        $headers = "From: Wrist Win <no-reply@wristwin.com>\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+        @mail($admin_email, $subject, $email_body, $headers);
+
+
+        // ------------------------------------
+        // SUCCESS RESPONSE SENT BACK TO JS
+        // ------------------------------------
         $conn->commit();
-        echo json_encode(["status" => "success"]);
+
+        echo json_encode([
+            "status" => "success",
+            "whatsapp" => $whatsapp_url
+        ]);
+
+        exit;
 
     } catch (Exception $e) {
         $conn->rollback();
@@ -245,6 +319,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <a href="https://www.instagram.com/wristwin" target="_blank" style="color:#E1306C;"><i class="fab fa-instagram"></i> Instagram</a>
                   <a href="https://www.facebook.com/share/1ANaokHvx8/?mibextid=wwXIfr" target="_blank" style="color:#1877F2;"><i class="fab fa-facebook"></i> Facebook</a>
                   <a href="https://www.tiktok.com/@wristwin" target="_blank" style="color:#ffffff;"><i class="fab fa-tiktok"></i> TikTok</a>
+                  <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
             </div>
          </div>
          <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
@@ -253,7 +328,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ✅ Load Cart Summary (Correct Price Calculation)
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const summary = document.getElementById("orderSummary");
   const itemsInput = document.getElementById("itemsInput");
@@ -263,16 +337,12 @@ document.addEventListener("DOMContentLoaded", function () {
       summary.innerHTML = "<p style='text-align:center;font-weight:bold;'>Your cart is empty.</p>";
     } else {
       let total = 0;
-
       summary.innerHTML = "<h3>Order Summary</h3>";
 
       cart.forEach(item => {
-
-        // ✅ Safe Price Check (NaN fix)
         let price = Number(item.display_price || item.price || 0);
         let qty = Number(item.quantity || 1);
         let itemTotal = price * qty;
-
         total += itemTotal;
 
         summary.innerHTML += `
@@ -295,50 +365,39 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       `;
 
-      if (itemsInput) {
-        itemsInput.value = JSON.stringify(cart);
-      }
+      itemsInput.value = JSON.stringify(cart);
     }
   }
 
-  // ✅ Modal Logic
   const modal = document.getElementById("orderModal");
-  const span = document.querySelector(".close");
 
-  if (span && modal) {
-    span.addEventListener("click", () => modal.style.display = "none");
-  }
+  // SUBMIT EVENT WITH ADMIN WHATSAPP OPEN
+  document.getElementById("checkoutForm").addEventListener("submit", async e => {
+    e.preventDefault();
 
-  if (modal) {
-    window.addEventListener("click", e => {
-      if (e.target === modal) modal.style.display = "none";
+    const formData = new FormData(e.target);
+
+    const response = await fetch("checkout.php", {
+      method: "POST",
+      body: formData
     });
-  }
 
-  // ✅ Submit Logic
-  const checkoutForm = document.getElementById("checkoutForm");
+    const result = await response.json();
 
-  if (checkoutForm) {
-    checkoutForm.addEventListener("submit", async e => {
-      e.preventDefault();
+    if (result.status === "success") {
 
-      const formData = new FormData(e.target);
-
-      const response = await fetch("checkout.php", {
-        method: "POST",
-        body: formData
-      });
-
-      const result = await response.text();
-
-      if (result === "success") {
-        modal.style.display = "flex";
-        localStorage.removeItem("cart");
-      } else {
-        alert("⚠️ Something went wrong. Please try again.");
+      // OPEN WHATSAPP MESSAGE TO ADMIN
+      if (result.whatsapp) {
+        window.open(result.whatsapp, "_blank");
       }
-    });
-  }
+
+      modal.style.display = "flex";
+      localStorage.removeItem("cart");
+
+    } else {
+      alert("⚠️ " + (result.message || "Something went wrong."));
+    }
+  });
 
 });
 </script>

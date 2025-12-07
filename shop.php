@@ -116,8 +116,15 @@ $conn->close();
     <section class="shop-header">
         <h1>Shop Our Watches</h1>
         <p>Explore luxury watches for Men & Women.</p>
-    </section>
 
+        <?php if ($active_sale && isset($active_sale['sale_name'], $active_sale['discount_percent'])): ?>
+        <h2 class="gradient-text">
+            🔥 <?= htmlspecialchars($active_sale['sale_name']) ?> - <?= htmlspecialchars($active_sale['discount_percent']) ?>% OFF!
+        </h2>
+    <?php endif; ?>
+    
+    </section>
+    
     <!-- Filters -->
     <div class="filter-buttons">
         <button class="active" onclick="filterCategory('all', this)">All</button>
@@ -160,7 +167,8 @@ $conn->close();
                             '<?= $watch['name'] ?>',
                             <?= $watch['price'] ?>,
                             <?= $watch['discounted_price'] ? $watch['discounted_price'] : 'null' ?>,
-                            '<?= $watch['image'] ?>'
+                            '<?= $watch['image'] ?>',
+                            <?= $watch['stock'] ?>
                         )">Add to Cart</button>
 
                     </div>
@@ -191,6 +199,7 @@ $conn->close();
                 <a href="https://www.instagram.com/wristwin" target="_blank" style="color:#E1306C;"><i class="fab fa-instagram"></i> Instagram</a>
                 <a href="https://www.facebook.com/share/1ANaokHvx8/?mibextid=wwXIfr" target="_blank" style="color:#1877F2;"><i class="fab fa-facebook"></i> Facebook</a>
                 <a href="https://www.tiktok.com/@wristwin" target="_blank" style="color:#ffffff;"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
             </div>
          </div>
           <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
@@ -202,21 +211,29 @@ $conn->close();
              const count = cart.reduce((acc, item) => acc + item.quantity, 0);
              document.getElementById("cart-count").textContent = count;
          }
-         function addToCart(id, name, original_price, discounted_price, image) {
+function addToCart(id, name, original_price, discounted_price, image, stock) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const existing = cart.find(item => item.id === id);
 
     if (existing) { 
-        existing.quantity += 1; 
+        if (existing.quantity < stock) {          // ✅ Check stock limit
+            existing.quantity += 1; 
+        } else {
+            alert(`Sorry! Maximum stock available is ${stock}.`);
+        }
     } else { 
-        cart.push({ 
-            id,  // ← important
-            name, 
-            original_price, 
-            display_price: discounted_price ? discounted_price : original_price, 
-            image, 
-            quantity: 1 
-        }); 
+        if (stock > 0) {
+            cart.push({ 
+                id,
+                name,
+                original_price,
+                display_price: discounted_price ? discounted_price : original_price,
+                image,
+                quantity: 1
+            });
+        } else {
+            alert("Sorry! This item is out of stock.");
+        }
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
