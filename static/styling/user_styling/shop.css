@@ -228,7 +228,7 @@ nav .logo img:hover {
     width: 100%;
     height: 100%;
     object-fit: contain; /* cover → cut hoti thi, contain → full dikhegi */
-    object-position: center;
+    object-position: cover;
 }
 
 /* ---------- PRODUCT INFO ---------- */
@@ -313,6 +313,7 @@ footer {
     padding: 10px 10px;
     color: white;
     text-align: center;
+    margin-top: 30px;
 }
 .footer-container {
     display: flex;

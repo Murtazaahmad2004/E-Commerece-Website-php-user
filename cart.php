@@ -92,7 +92,6 @@ async function loadStock() {
         });
 
         const data = await response.json();
-        console.log("Stock response:", data);
         stockData = data;
     } 
     catch (err) {
@@ -102,9 +101,6 @@ async function loadStock() {
     renderCart();
 }
 
-// ----------------------
-// Render Cart
-// ----------------------
 function renderCart() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartContainer = document.getElementById("cartItems");
@@ -114,49 +110,91 @@ function renderCart() {
     let total = 0;
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = "<p style='text-align:center;color:#fff;'>Your cart is empty.</p>";
-        cartTotal.textContent = "PKR 0";
-        return;
+    cartContainer.innerHTML = "<p style='text-align:center;color:#fff;'>Your cart is empty.</p>";
+    cartTotal.textContent = "PKR 0";
+
+    // Hide button but keep space
+    document.querySelector(".checkout-btn").style.visibility = "hidden";
+    return;
     }
 
+    // Show when items available
+    document.querySelector(".checkout-btn").style.visibility = "visible";
+
+    // SHOW CHECKOUT BUTTON when cart has items
+    document.querySelector(".checkout-btn").style.display = "block";
+
     cart.forEach((item, index) => {
-        const stockItem = stockData[item.id] || {
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            stock: item.stock,
-            image: item.image
-        };
+        const stockItem = stockData[item.id] || item;
 
         if (item.quantity > stockItem.stock) item.quantity = stockItem.stock;
 
         total += stockItem.price * item.quantity;
 
         cartContainer.innerHTML += `
-        <div class="cart-item">
+        <div class="cart-item" id="item-${index}">
             <img src="https://admin.wristwin.shop/${stockItem.image}" alt="${stockItem.name}">
+            
             <div class="cart-details">
                 <h3>${stockItem.name}</h3>
                 <p>${formatPKR(stockItem.price)}</p>
-                <p style="color:yellow;">${stockItem.stock > 0 ? "Stock: " + stockItem.stock : "Out of Stock"}</p>
+                <p id="stock-${index}" style="color:yellow;">
+                    ${stockItem.stock > 0 ? "Stock: " + stockItem.stock : "Out of Stock"}
+                </p>
             </div>
 
             <div class="cart-quantity">
-                <button onclick="changeQty(${index}, -1)" ${stockItem.stock === 0 ? "disabled" : ""}>−</button>
+                <button onclick="changeQty(${index}, -1)" id="minus-${index}">−</button>
                 <span id="qty-${index}">${item.quantity}</span>
-                <button onclick="changeQty(${index}, 1)" id="plus-${index}" ${(item.quantity >= stockItem.stock || stockItem.stock === 0) ? "disabled" : ""}>+</button>
+                <button onclick="changeQty(${index}, 1)" id="plus-${index}">+</button>
             </div>
-
-            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
         </div>`;
     });
 
     cartTotal.textContent = formatPKR(total);
 
+    updateButtonsState();
+}
+
+// ----------------------
+// Update ONLY Qty + Buttons
+// ----------------------
+function updateUI() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        const stockItem = stockData[item.id] || item;
+
+        total += stockItem.price * item.quantity;
+
+        if (document.getElementById(`qty-${index}`)) {
+            document.getElementById(`qty-${index}`).textContent = item.quantity;
+        }
+    });
+
+    document.getElementById("cartTotal").textContent = formatPKR(total);
+
+    updateButtonsState();
+}
+
+// ----------------------
+// Update Button States
+// ----------------------
+function updateButtonsState() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     cart.forEach((item, index) => {
         const stockItem = stockData[item.id] || { stock: 0 };
+
         const plusBtn = document.getElementById(`plus-${index}`);
-        if (plusBtn) plusBtn.disabled = item.quantity >= stockItem.stock;
+        const minusBtn = document.getElementById(`minus-${index}`);
+
+        if (!plusBtn || !minusBtn) return;
+
+        // STOP disabling minus at quantity = 1
+        plusBtn.disabled = item.quantity >= stockItem.stock;
+        minusBtn.disabled = false;  // FIXED
     });
 }
 
@@ -168,36 +206,27 @@ function changeQty(index, change) {
     const item = cart[index];
     const stockItem = stockData[item.id] || { stock: 0 };
 
+    // Remove item when quantity = 1 and minus pressed
+    if (change === -1 && item.quantity === 1) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+        return;
+    }
+
     if (change === 1 && item.quantity >= stockItem.stock) return;
-    if (change === -1 && item.quantity <= 1) return;
 
     item.quantity += change;
     localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
+
+    updateUI();
 }
 
 // ----------------------
-// Remove Item
+// Initial Load
 // ----------------------
-function removeItem(index) {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-}
-
-// ----------------------
-// Auto Stock Updates
-// ----------------------
-function startLiveStockUpdates() {
-    stockInterval = setInterval(loadStock, 5000);
-}
-
-// Init
 loadStock();
-startLiveStockUpdates();
 
 </script>
-
 </body>
 </html>
