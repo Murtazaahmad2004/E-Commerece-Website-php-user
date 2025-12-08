@@ -4,9 +4,10 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Privacy Policy - Wrist Win Watches</title>
-
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
       <link rel="stylesheet" href="static/styling/user_styling/privacy_policy.css" />
+      <link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="https://wristwin.shop/static/icon.png">
    </head>
 
    <body>

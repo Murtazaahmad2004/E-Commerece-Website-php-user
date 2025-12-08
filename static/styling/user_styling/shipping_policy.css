@@ -197,15 +197,8 @@ footer h3 {
     .nav-links::-webkit-scrollbar {
         display: none; /* Chrome hide scrollbar */
     }
-
-    .buttons,
-    .login-btn {
-        padding: 8px 8px;
-        font-size: 0.9rem;
-        flex-shrink: 0;    /* <-- NEW: prevents shrinking (Login hidden issue fix) */
-        white-space: nowrap;
-    }
 }
+
 /* RESPONSIVE SLIDER */
 @media(max-width: 600px) {
     .slider {
@@ -230,23 +223,16 @@ footer h3 {
         height: 400px;
     }
 }
+@media (max-width: 992px) {
+    footer p,
+    .footer-container p,
+    .footer-container,
+    .footer-container div {
+        text-align: center !important;
+    }
 
-/* ============================================
-   📌 FOOTER RESPONSIVENESS
-============================================ */
-@media(max-width: 992px) {
     .footer-container {
         flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-    .footer-container .social-column {
-        text-align: center;
-    }
-}
-
-@media(max-width: 500px) {
-    footer p {
-        font-size: 0.8rem;
+        align-items: center;
     }
 }

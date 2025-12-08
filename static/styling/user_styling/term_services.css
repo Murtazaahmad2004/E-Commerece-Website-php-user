@@ -241,22 +241,16 @@ footer h3 {
     }
 }
 
-/* ============================================
-   📌 FOOTER RESPONSIVENESS
-============================================ */
-@media(max-width: 992px) {
+@media (max-width: 992px) {
+    footer p,
+    .footer-container p,
+    .footer-container,
+    .footer-container div {
+        text-align: center !important;
+    }
+
     .footer-container {
         flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-    .footer-container .social-column {
-        text-align: center;
-    }
-}
-
-@media(max-width: 500px) {
-    footer p {
-        font-size: 0.8rem;
+        align-items: center;
     }
 }

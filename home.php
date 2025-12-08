@@ -79,7 +79,17 @@ $conn->close();
 <title>Wrist Win Watches - Home</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="static/styling/user_styling/home.css">
-<link rel="icon" type="image/png" sizes="16x16" href="static/icon.png">
+<!-- Favicon for browsers -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://wristwin.shop/static/icon.png">
+
+<!-- Apple Touch Icon for iOS -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://wristwin.shop/static/icon.png">
+
+<!-- Optional: Safari pinned tab -->
+<link rel="mask-icon" href="https://wristwin.shop/static/icon.svg" color="#0072ff">
+
+
 </head>
 <body>
 
@@ -138,7 +148,7 @@ $conn->close();
                                 <span class="discounted-price">Rs. <?= $watch['discounted_price'] ?></span>
                             </div>
                         <?php else: ?>
-                            <div class="price"><span class="discounted-price">Rs. <?= $watch['price'] ?></span></div>
+                            <div class="price"><span class="discounted-price">PKR. <?= $watch['price'] ?></span></div>
                         <?php endif; ?>
                         <a href="shop.php"><button>Shop Now</button></a>
                     </div>

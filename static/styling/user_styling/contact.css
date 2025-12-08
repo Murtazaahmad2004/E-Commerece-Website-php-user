@@ -185,6 +185,19 @@ footer h3 {
         height: 55px;
     }
 }
+@media (max-width: 992px) {
+    footer p,
+    .footer-container p,
+    .footer-container,
+    .footer-container div {
+        text-align: center !important;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 /* ---------- SMALL DEVICE FIXES ---------- */
 @media(max-width: 480px) {

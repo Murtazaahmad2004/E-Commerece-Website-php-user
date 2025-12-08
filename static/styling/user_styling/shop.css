@@ -378,6 +378,20 @@ footer h3 {
     .product-grid {  display: flex; flex-direction: column; grid-template-columns: repeat(3,1fr); gap: 20px; justify-items: center; }
     .image-container { aspect-ratio: 4/3; }
 }
+@media (max-width: 992px) {
+    footer p,
+    .footer-container p,
+    .footer-container,
+    .footer-container div {
+        text-align: center !important;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 @media(max-width: 768px) {
     .shop-header h1 { font-size: 1.8rem; }
     .shop-header p { font-size: 0.9rem; }
