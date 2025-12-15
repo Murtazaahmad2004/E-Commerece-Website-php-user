@@ -105,24 +105,26 @@ function renderCart() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartContainer = document.getElementById("cartItems");
     const cartTotal = document.getElementById("cartTotal");
+    const checkoutBtn = document.querySelector(".checkout-btn");
+    const cartSummary = document.querySelector(".cart-summary");
 
     cartContainer.innerHTML = "";
-    let total = 0;
 
     if (cart.length === 0) {
-    cartContainer.innerHTML = "<p style='text-align:center;color:#fff;'>Your cart is empty.</p>";
-    cartTotal.textContent = "PKR 0";
+        cartContainer.innerHTML = "<p style='text-align:center;color:#fff;'>Your cart is empty.</p>";
+        cartTotal.textContent = "PKR 0";
 
-    // Hide button but keep space
-    document.querySelector(".checkout-btn").style.visibility = "hidden";
-    return;
+        // Properly hide summary and button
+        checkoutBtn.style.display = "none";       // button completely hidden
+        cartSummary.style.display = "none";       // summary hidden
+        return;
     }
 
-    // Show when items available
-    document.querySelector(".checkout-btn").style.visibility = "visible";
+    // Show summary and checkout button
+    checkoutBtn.style.display = "inline-block";
+    cartSummary.style.display = "block";
 
-    // SHOW CHECKOUT BUTTON when cart has items
-    document.querySelector(".checkout-btn").style.display = "block";
+    let total = 0;
 
     cart.forEach((item, index) => {
         const stockItem = stockData[item.id] || item;
