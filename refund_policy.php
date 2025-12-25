@@ -32,7 +32,7 @@
       <div class="policy">
          <h1>Return & Refund Policy</h1>
          <p><i class="fa-solid fa-rotate-left"></i> At Wrist Win Watches, customer satisfaction is our top priority.</p>
-         <p>If you receive a damaged or incorrect product, please contact us within <strong>3-5 business days</strong> of delivery for an exchange or refund.</p>
+         <p>If you receive a damaged or incorrect product, please contact us within <strong>3-6 business days</strong> of delivery for an exchange or refund.</p>
          <p>Items must be unused, unopened, and in their original packaging to qualify for a return.</p>
          <p>Refunds will be processed once the returned product is received and inspected.</p>
          <p>We reserve the right to decline returns for used or tampered products due to hygiene reasons.</p>

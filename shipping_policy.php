@@ -31,7 +31,7 @@
       <!-- 🚚 Shipping Policy Section -->
       <div class="shipping">
          <h1>Shipping Policy</h1>
-         <p><i class="fa-solid fa-truck-fast"></i> We offer <strong>free delivery across Pakistan</strong> for all orders.</p>
+         <p><i class="fa-solid fa-truck-fast"></i> We offer <strong>delivery across Pakistan</strong> for all orders.</p>
          <p><i class="fa-solid fa-clock"></i> Standard delivery time: <strong>3–6 business days</strong>, depending on your location.</p>
          <p><i class="fa-solid fa-box"></i> All orders are processed within <strong>24 hours</strong> and safely delivered to your doorstep.</p>
          <p><i class="fa-solid fa-headset"></i> For any shipping-related concerns, feel free to contact our <strong>support team</strong>.</p>
