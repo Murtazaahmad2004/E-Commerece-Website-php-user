@@ -89,22 +89,28 @@ $conn->close();
 <!-- Optional: Safari pinned tab -->
 <link rel="mask-icon" href="https://wristwin.shop/static/icon.svg" color="#0072ff">
 
-
 </head>
 <body>
 
 <!-- Navbar -->
-<nav>
-    <div class="logo">
-        <a href="home.php"><img src="static/logo.webp" alt="wrist-win"></a>
-    </div> 
-    <div class="nav-links">
-        <a class="buttons" href="home.php">Home</a>
-        <a class="buttons" href="shop.php">Shop</a>
-        <a class="buttons" href="contact.php">Contact</a>
-        <a class="buttons" href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
+
+
+<nav class="nav">
+    <div class="nav-left">
+        <a href="/"><img class="logo" src="static/logo.webp" alt="wrist-win"></a>
+    </div>
+
+    <div class="nav-right">
+        <div class="nav-links">
+            <a class="buttons" href="home.php">Home</a>
+             <a class="buttons" href="shop.php">Shop</a>
+             <a class="buttons" href="contact.php">Contact</a>
+
+             <a href="cart.php" class="cart-icon" id="cart-icon"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge" id="cart-count">0</span></a>
+        </div>
     </div>
 </nav>
+
 
 <!-- Hero Slider -->
 <div class="slider">
@@ -188,6 +194,18 @@ $conn->close();
 </footer>
 
 <script>
+    function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+    document.getElementById("cart-count").textContent = count;
+    }
+
+    /* Call when page loads */
+    document.addEventListener("DOMContentLoaded", updateCartCount);
+
+    /* Call when storage changes (other pages like shop.php) */
+    window.addEventListener("storage", updateCartCount);
+
     // Product scroll animation
     const products = document.querySelectorAll('.product-card');
     const observer = new IntersectionObserver((entries, obs) => {

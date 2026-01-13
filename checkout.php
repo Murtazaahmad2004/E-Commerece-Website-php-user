@@ -207,7 +207,7 @@ Sale Status: $sale_status
 
       <div class="banner">
         <marquee>
-            <h1>🎁 Free Shipping & Cash on Delivery Available</h1>
+            <h1>🎁 Cash on Delivery Available</h1>
         </marquee>
       </div>
 
