@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     die(json_encode(["status" => "error", "message" => "Database connection failed: " . $conn->connect_error]));
 }
 
-// ✅ Handle POST request
+// Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = $_POST['name'] ?? '';
@@ -28,83 +28,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = $_POST['address'] ?? '';
     $payment_method = "Cash on Delivery";
 
+    // Decode cart from client
     $items_json = $_POST['items'] ?? '[]';
-    $items = json_decode($items_json, true);
+    $cart = json_decode($items_json, true);
 
-    if (empty($items)) {
+    if (empty($cart)) {
         echo json_encode(["status" => "error", "message" => "Cart is empty"]);
         exit;
     }
 
-    // ✅ Check active sale
+    // Fetch product data from DB
+    $ids = array_column($cart, 'id');
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+    $stmt = $conn->prepare("SELECT id, name, price, stock FROM watches WHERE id IN ($placeholders)");
+    $stmt->bind_param(str_repeat("i", count($ids)), ...$ids);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $products = [];
+    while ($row = $result->fetch_assoc()) {
+        $products[$row['id']] = $row;
+    }
+
+    // ✅ Calculate total and validate stock
+    $total = 0;
+    foreach ($cart as $item) {
+        $pid = $item['id'];
+        $qty = intval($item['quantity']);
+
+        if (!isset($products[$pid])) {
+            echo json_encode(["status" => "error", "message" => "Product not found"]);
+            exit;
+        }
+
+        if ($products[$pid]['stock'] < $qty) {
+            echo json_encode(["status" => "error", "message" => "Insufficient stock for " . $products[$pid]['name']]);
+            exit;
+        }
+
+        $total += $products[$pid]['price'] * $qty;
+    }
+
+    // Check active sale
     $sale_status = "Inactive";
     $sale_result = $conn->query("SELECT * FROM sales WHERE status='active' ORDER BY id DESC LIMIT 1");
     if ($sale_result && $sale_result->num_rows > 0) {
         $sale_status = "Active";
     }
 
-    // ✅ Calculate total
-    $total = 0;
-    foreach ($items as $item) {
-        $price = isset($item['display_price']) ? floatval($item['display_price']) : (isset($item['price']) ? floatval($item['price']) : 0);
-        $qty = isset($item['quantity']) ? intval($item['quantity']) : 1;
-        $total += $price * $qty;
-    }
-
-    // ✅ Begin transaction
+    // Begin transaction
     $conn->begin_transaction();
     try {
 
         // ✅ Update stock
-        foreach ($items as $item) {
-            $stmt = $conn->prepare("SELECT id, stock FROM watches WHERE name = ?");
-            $stmt->bind_param("s", $item['name']);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $watch_item = $result->fetch_assoc();
+        foreach ($cart as $item) {
+            $pid = $item['id'];
+            $qty = intval($item['quantity']);
+            $new_stock = $products[$pid]['stock'] - $qty;
 
-            if (!$watch_item) {
-                throw new Exception("Watch not found: " . $item['name']);
-            }
-
-            if ($watch_item['stock'] < intval($item['quantity'])) {
-                throw new Exception("Insufficient stock for: " . $item['name']);
-            }
-
-            $new_stock = $watch_item['stock'] - intval($item['quantity']);
             $update_stmt = $conn->prepare("UPDATE watches SET stock = ? WHERE id = ?");
-            $update_stmt->bind_param("ii", $new_stock, $watch_item['id']);
+            $update_stmt->bind_param("ii", $new_stock, $pid);
             $update_stmt->execute();
         }
 
         // ✅ Insert order
+        $items_json_encoded = json_encode($cart);
         $insert_stmt = $conn->prepare("
             INSERT INTO orders 
             (user_name, email, phone, country, city, postal, address, total, payment_method, items, sale_status) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        $items_json_encoded = json_encode($items);
         $insert_stmt->bind_param(
             "sssssssssss",
-            $name, $email, $phone, $country, $city, $postal, $address, $total, $payment_method, $items_json_encoded, $sale_status
+            $name, $email, $phone, $country, $city, $postal,
+            $address, $total, $payment_method,
+            $items_json_encoded, $sale_status
         );
         $insert_stmt->execute();
 
-
-        // -----------------------------------
-        // ✅ ADMIN NOTIFICATION SECTION
-        // -----------------------------------
-
+        // -------------------------------
+        // Admin notification
+        // -------------------------------
         $admin_phone = "923231508088"; 
         $admin_email = "businessinfo.pk47@gmail.com";
 
-        // Convert items into text
         $item_text = "";
-        foreach ($items as $it) {
-            $item_text .= $it['name'] . " (x" . $it['quantity'] . ") - Rs " . $it['display_price'] . "\n";
+        foreach ($cart as $it) {
+            $price = $products[$it['id']]['price'];
+            $item_text .= $products[$it['id']]['name'] . " (x" . $it['quantity'] . ") - Rs " . $price . "\n";
         }
 
-        // WhatsApp Admin Message
         $whatsapp_message = urlencode(
 "📦 *New Order Received!*
 
@@ -125,7 +138,6 @@ Please confirm the order."
 
         $whatsapp_url = "https://wa.me/$admin_phone?text=$whatsapp_message";
 
-        // Email Notification
         $subject = "New Order Received - Wrist Win Watches";
         $email_body = "
 A new order has been placed.
@@ -153,27 +165,22 @@ Sale Status: $sale_status
 
         @mail($admin_email, $subject, $email_body, $headers);
 
-
-        // ------------------------------------
-        // SUCCESS RESPONSE SENT BACK TO JS
-        // ------------------------------------
+        // Commit transaction
         $conn->commit();
 
         echo json_encode([
             "status" => "success",
             "whatsapp" => $whatsapp_url
         ]);
-
         exit;
 
     } catch (Exception $e) {
         $conn->rollback();
         echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+        exit;
     }
-
-    $conn->close();
-    exit;
 }
+$conn->close();
 ?>
 
 <!-- ✅ HTML Checkout Form -->
@@ -329,22 +336,22 @@ Sale Status: $sale_status
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const summary = document.getElementById("orderSummary");
   const itemsInput = document.getElementById("itemsInput");
+  const modal = document.getElementById("orderModal");
 
+  // Show order summary
   if (summary) {
     if (cart.length === 0) {
       summary.innerHTML = "<p style='text-align:center;font-weight:bold;'>Your cart is empty.</p>";
     } else {
       let total = 0;
       summary.innerHTML = "<h3>Order Summary</h3>";
-
       cart.forEach(item => {
-        let price = Number(item.display_price || item.price || 0);
-        let qty = Number(item.quantity || 1);
-        let itemTotal = price * qty;
+        const price = Number(item.display_price || item.price || 0);
+        const qty = Number(item.quantity || 1);
+        const itemTotal = price * qty;
         total += itemTotal;
 
         summary.innerHTML += `
@@ -361,47 +368,35 @@ document.addEventListener("DOMContentLoaded", function () {
           <span>Shipping</span>
           <span style='color:#28a745;'>Free</span>
         </div>
-
         <div class='order-total'>
           Total: ₨ ${total.toLocaleString()}
         </div>
       `;
-
       itemsInput.value = JSON.stringify(cart);
     }
   }
 
-  const modal = document.getElementById("orderModal");
-
-  // SUBMIT EVENT WITH ADMIN WHATSAPP OPEN
+  // Submit checkout
   document.getElementById("checkoutForm").addEventListener("submit", async e => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
 
     const response = await fetch("checkout.php", {
       method: "POST",
       body: formData
     });
-
     const result = await response.json();
 
     if (result.status === "success") {
-
-      // OPEN WHATSAPP MESSAGE TO ADMIN
-      if (result.whatsapp) {
-        window.open(result.whatsapp, "_blank");
-      }
-
+      if (result.whatsapp) window.open(result.whatsapp, "_blank");
       modal.style.display = "flex";
       localStorage.removeItem("cart");
-
     } else {
       alert("⚠️ " + (result.message || "Something went wrong."));
     }
   });
-
 });
 </script>
+
 </body>
 </html>

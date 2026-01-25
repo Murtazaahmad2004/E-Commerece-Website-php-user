@@ -59,9 +59,7 @@
     <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
 </footer>
 
-
 <script>
-
 // ----------------------
 // Format PKR
 // ----------------------
@@ -70,13 +68,13 @@ function formatPKR(amount) {
 }
 
 let stockData = {};
-let stockInterval;
 
 // ----------------------
 // Load stock from server
 // ----------------------
 async function loadStock() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     if (cart.length === 0) {
         renderCart();
         return;
@@ -91,16 +89,17 @@ async function loadStock() {
             body: JSON.stringify({ product_ids: productIds })
         });
 
-        const data = await response.json();
-        stockData = data;
-    } 
-    catch (err) {
+        stockData = await response.json();
+    } catch (err) {
         console.error("Stock load failed:", err);
     }
 
     renderCart();
 }
 
+// ----------------------
+// Render Cart
+// ----------------------
 function renderCart() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartContainer = document.getElementById("cartItems");
@@ -111,124 +110,80 @@ function renderCart() {
     cartContainer.innerHTML = "";
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = "<p style='text-align:center;color:#fff;'>Your cart is empty.</p>";
+        cartContainer.innerHTML =
+            "<p style='text-align:center;color:#fff;'>Your cart is empty.</p>";
         cartTotal.textContent = "PKR 0";
-
-        // Properly hide summary and button
-        checkoutBtn.style.display = "none";       // button completely hidden
-        cartSummary.style.display = "none";       // summary hidden
+        checkoutBtn.style.display = "none";
+        cartSummary.style.display = "none";
         return;
     }
 
-    // Show summary and checkout button
     checkoutBtn.style.display = "inline-block";
     cartSummary.style.display = "block";
 
     let total = 0;
 
     cart.forEach((item, index) => {
-        const stockItem = stockData[item.id] || item;
+        const p = stockData[item.id] || item;
 
-        if (item.quantity > stockItem.stock) item.quantity = stockItem.stock;
+        if (item.quantity > p.stock) item.quantity = p.stock;
 
-        total += stockItem.price * item.quantity;
+        total += p.price * item.quantity;
 
         cartContainer.innerHTML += `
-        <div class="cart-item" id="item-${index}">
-            <img src="https://admin.wristwin.shop/${stockItem.image}" alt="${stockItem.name}">
-            
+        <div class="cart-item">
+            <img src="https://admin.wristwin.shop/${p.image}" alt="${p.name}">
+
             <div class="cart-details">
-                <h3>${stockItem.name}</h3>
-                <p>${formatPKR(stockItem.price)}</p>
-                <p id="stock-${index}" style="color:yellow;">
-                    ${stockItem.stock > 0 ? "Stock: " + stockItem.stock : "Out of Stock"}
+                <h3>${p.name}</h3>
+                <p>
+                    ${p.discount > 0
+                        ? `<del>${formatPKR(p.original_price)}</del>
+                           <strong style="color:#0f0;"> ${formatPKR(p.price)}</strong>`
+                        : formatPKR(p.price)}
+                </p>
+                <p style="color:yellow;">
+                    ${p.stock > 0 ? "Stock: " + p.stock : "Out of Stock"}
                 </p>
             </div>
 
             <div class="cart-quantity">
-                <button onclick="changeQty(${index}, -1)" id="minus-${index}">−</button>
+                <button onclick="changeQty(${index}, -1)">−</button>
                 <span id="qty-${index}">${item.quantity}</span>
-                <button onclick="changeQty(${index}, 1)" id="plus-${index}">+</button>
+                <button onclick="changeQty(${index}, 1)" 
+                    ${item.quantity >= p.stock ? "disabled" : ""}>+</button>
             </div>
         </div>`;
     });
 
     cartTotal.textContent = formatPKR(total);
-
-    updateButtonsState();
-}
-
-// ----------------------
-// Update ONLY Qty + Buttons
-// ----------------------
-function updateUI() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        const stockItem = stockData[item.id] || item;
-
-        total += stockItem.price * item.quantity;
-
-        if (document.getElementById(`qty-${index}`)) {
-            document.getElementById(`qty-${index}`).textContent = item.quantity;
-        }
-    });
-
-    document.getElementById("cartTotal").textContent = formatPKR(total);
-
-    updateButtonsState();
-}
-
-// ----------------------
-// Update Button States
-// ----------------------
-function updateButtonsState() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.forEach((item, index) => {
-        const stockItem = stockData[item.id] || { stock: 0 };
-
-        const plusBtn = document.getElementById(`plus-${index}`);
-        const minusBtn = document.getElementById(`minus-${index}`);
-
-        if (!plusBtn || !minusBtn) return;
-
-        // STOP disabling minus at quantity = 1
-        plusBtn.disabled = item.quantity >= stockItem.stock;
-        minusBtn.disabled = false;  // FIXED
-    });
 }
 
 // ----------------------
 // Change Quantity
 // ----------------------
 function changeQty(index, change) {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const item = cart[index];
-    const stockItem = stockData[item.id] || { stock: 0 };
+    const p = stockData[item.id];
 
-    // Remove item when quantity = 1 and minus pressed
     if (change === -1 && item.quantity === 1) {
         cart.splice(index, 1);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        renderCart();
+    } else if (change === 1 && item.quantity >= p.stock) {
         return;
+    } else {
+        item.quantity += change;
     }
 
-    if (change === 1 && item.quantity >= stockItem.stock) return;
-
-    item.quantity += change;
     localStorage.setItem("cart", JSON.stringify(cart));
-
-    updateUI();
+    renderCart();
 }
 
 // ----------------------
 // Initial Load
 // ----------------------
 loadStock();
-
 </script>
+
 </body>
 </html>
