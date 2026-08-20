@@ -3,6 +3,7 @@ FROM dunglas/frankenphp:php8.3
 WORKDIR /app
 
 COPY . /app
+COPY Caddyfile /etc/caddy/Caddyfile
 
 RUN mkdir -p /data
 
