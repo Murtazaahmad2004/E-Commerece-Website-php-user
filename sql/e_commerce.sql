@@ -1,6 +1,3 @@
-CREATE DATABASE ecommercestore;
-USE ecommercestore;
-
 CREATE TABLE watches (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -32,12 +29,12 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE IF NOT EXISTS sales (
-id INT AUTO_INCREMENT PRIMARY KEY,
-sale_name VARCHAR(100) NOT NULL,
-discount_percent INT NOT NULL,
-start_date DATE NULL,
-end_date DATE NULL,
-status ENUM('active','inactive') DEFAULT 'inactive',
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_name VARCHAR(100) NOT NULL,
+    discount_percent INT NOT NULL,
+    start_date DATE NULL,
+    end_date DATE NULL,
+    status ENUM('active','inactive') DEFAULT 'inactive',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL
 );
