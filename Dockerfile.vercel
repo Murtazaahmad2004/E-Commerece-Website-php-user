@@ -5,6 +5,9 @@ WORKDIR /app
 COPY . /app
 COPY Caddyfile /etc/caddy/Caddyfile
 
+# Install MySQLi extension
+RUN install-php-extensions mysqli
+
 RUN mkdir -p /data
 
 ENV SERVER_NAME=:80
