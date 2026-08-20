@@ -4,12 +4,13 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // DATABASE CONNECTION
-$servername = "localhost";               // Usually localhost on Hostinger
-$username = "u459954629_hostinger";     // Your MySQL user
-$password = "Root@2004@2004";          // Your MySQL password
-$dbname = "u459954629_ecommercestore";  // Your database name
+$servername = "sql12.freesqldatabase.com";
+$username = "sql12835678";
+$password = "YLfYA7BLl4";
+$dbname = "sql12835678";
+$dbport = 3306;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $dbport);
 if ($conn->connect_error) { die("DB Connection Failed: " . $conn->connect_error); }
 
 // --- IMAGE UPLOAD HANDLER ---

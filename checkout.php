@@ -6,12 +6,13 @@ error_reporting(E_ALL);
 session_start();
 
 // ✅ Database connection
-$servername = "localhost";
-$username = "u459954629_hostinger";
-$password = "Root@2004@2004";
-$dbname = "u459954629_ecommercestore";
+$servername = "sql12.freesqldatabase.com";
+$username = "sql12835678";
+$password = "YLfYA7BLl4";
+$dbname = "sql12835678";
+$dbport = 3306;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $dbport);
 if ($conn->connect_error) {
     die(json_encode(["status" => "error", "message" => "Database connection failed: " . $conn->connect_error]));
 }
