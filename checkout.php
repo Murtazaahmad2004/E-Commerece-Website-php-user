@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 session_start();
 
 // ✅ Database connection
-$servername = "sql12.gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
+$servername = "gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
 $username = getenv("DB_USERNAME");
 $password = getenv("DB_PASSWORD");
 $dbname = "e-commerece";

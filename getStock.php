@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$servername = "sql12.gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
+$servername = "gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
 $username = getenv("DB_USERNAME");
 $password = getenv("DB_PASSWORD");
 $dbname = "e-commerece";
