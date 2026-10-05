@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 session_start();
 
 // ✅ Database connection
-$servername = "sql12.freesqldatabase.com";
-$username = "sql12835678";
-$password = "YLfYA7BLl4";
-$dbname = "sql12835678";
-$dbport = 3306;
+$servername = "sql12.gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
+$username = getenv("DB_USERNAME");
+$password = getenv("DB_PASSWORD");
+$dbname = "e-commerece";
+$dbport = 4000;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $dbport);
 if ($conn->connect_error) {
