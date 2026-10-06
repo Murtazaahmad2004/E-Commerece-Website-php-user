@@ -2,13 +2,38 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Database connection
 $servername = "gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
 $username = getenv("DB_USERNAME");
 $password = getenv("DB_PASSWORD");
-$dbname = "e-commerece";
+$dbname = "ecommerece";
 $dbport = 4000;
 
-$conn = new mysqli($servername, $username, $password, $dbname, $dbport);
+// TiDB Cloud TLS configuration
+$ssl_ca = __DIR__ . "/ca.pem";
+
+$conn = mysqli_init();
+
+mysqli_ssl_set(
+    $conn,
+    NULL,       // client key
+    NULL,       // client certificate
+    $ssl_ca,    // CA certificate
+    NULL,
+    NULL
+);
+
+mysqli_real_connect(
+    $conn,
+    $servername,
+    $username,
+    $password,
+    $dbname,
+    $dbport,
+    NULL,
+    MYSQLI_CLIENT_SSL
+);
+
 if ($conn->connect_error) {
     echo json_encode(["error" => $conn->connect_error]);
     exit;
