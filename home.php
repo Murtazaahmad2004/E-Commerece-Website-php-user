@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 $servername = "gateway01.ap-northeast-1.prod.aws.tidbcloud.com";
 $username = getenv("DB_USERNAME");
 $password = getenv("DB_PASSWORD");
-$dbname = "e-commerece";
+$dbname = "ecommerece";
 $dbport = 4000;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $dbport);
