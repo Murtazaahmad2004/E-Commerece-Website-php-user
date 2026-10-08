@@ -144,7 +144,7 @@ $conn->close();
     <!-- Header -->
     <section class="shop-header">
         <h1>Shop Our Watches</h1>
-        <p>Explore luxury watches for Men & Women.</p>
+        <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
 
         <?php if ($active_sale && isset($active_sale['sale_name'], $active_sale['discount_percent'])): ?>
         <h2 class="gradient-text">

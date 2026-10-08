@@ -43,10 +43,10 @@
          <p>All prices are listed in Pakistani Rupees (PKR). Payments are processed securely through trusted payment methods. We are not responsible for payment delays due to third-party services.</p>
          
          <h2>4. Shipping & Delivery</h2>
-         <p>Orders are shipped within 24–48 hours. Standard delivery time is 3–5 working days depending on your location. Please refer to our <a href="shipping_policy.php">Shipping Policy</a> for details.</p>
+         <p>Orders are shipped within 24–48 hours. Standard delivery time is 3–6 working days depending on your location. Please refer to our <a href="shipping_policy.php">Shipping Policy</a> for details.</p>
          
          <h2>5. Returns & Refunds</h2>
-         <p>If your order arrives damaged or incorrect, please contact us within 3 days of delivery. Read our <a href="refund_policy.php">Return Policy</a> for full details.</p>
+         <p>If your order arrives damaged or incorrect, please contact us within 3-6 days of delivery. Read our <a href="refund_policy.php">Return Policy</a> for full details.</p>
          
          <h2>6. Privacy & Data Protection</h2>
          <p>Your personal information is collected only for order processing and communication purposes. For more details, please check our <a href="privacy_policy.php">Privacy Policy</a>.</p>
@@ -69,7 +69,7 @@
 
             <div>
                <h3>About Time & Style</h3>
-               <p>Luxury Watches crafted with passion and precision. Experience timeless elegance for Men & Women.</p>
+               <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
             </div>
 
             <div>

@@ -343,7 +343,7 @@ $conn->close();
             <!-- Center: About Time & Style -->
             <div>
                   <h3>About Time & Style</h3>
-                  <p>Luxury Watches crafted with passion and precision. Experience timeless elegance for Men & Women.</p>
+                  <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
             </div>
 
             <!-- Right: Follow Us -->

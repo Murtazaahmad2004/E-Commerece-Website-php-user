@@ -53,7 +53,7 @@
 
         <div>
             <h3>About Time & Style</h3>
-            <p>Luxury Watches crafted with passion and purity. Experience timeless for Men & Women.</p>
+            <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
         </div>
 
         <div>
