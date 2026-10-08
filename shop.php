@@ -110,7 +110,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Wrist Win Watches</title>
+    <title>Shop - Time & Style Watches</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/styling/user_styling/shop.css">
     <link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.webp">
@@ -219,7 +219,7 @@ $conn->close();
                   <a href="contact.php">Contact Information</a>
             </div>
             <div>
-               <h3>About Wrist Win</h3>
+               <h3>About Time & Style</h3>
                <p>Luxury Watches crafted with passion and purity. Experience timeless for Men & Women.</p>
             </div>
             <div>
@@ -231,7 +231,7 @@ $conn->close();
                 <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
             </div>
          </div>
-          <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
+          <p>© 2025 Time & Style Watches — Crafted with elegance & love.</p>
       </footer>
       <script>
          const cart = JSON.parse(localStorage.getItem("cart")) || [];

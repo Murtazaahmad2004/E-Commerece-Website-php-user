@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Wrist Win Watches</title>
+    <title>Contact Us - Time & Style Watches</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/styling/user_styling/contact.css">
     <link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.png">
@@ -30,7 +30,7 @@
 <!-- Contact Info -->
 <div class="contact">
     <h1>Contact Information</h1>
-    <p><i class="fa-solid fa-user"></i> Brand Name: <strong>Wrist Win</strong></p>
+    <p><i class="fa-solid fa-user"></i> Brand Name: <strong>Time & Style</strong></p>
     <p><i class="fa-solid fa-phone"></i> Phone: <strong>+92 323-1508088</strong></p>
     <p><i class="fa-solid fa-envelope"></i> Email: <strong>businessinfo.pk47@gmail.com</strong></p>
     <br>
@@ -52,7 +52,7 @@
         </div>
 
         <div>
-            <h3>About Wrist Win</h3>
+            <h3>About Time & Style</h3>
             <p>Luxury Watches crafted with passion and purity. Experience timeless for Men & Women.</p>
         </div>
 
@@ -65,7 +65,7 @@
             <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
-    <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
+    <p>© 2025 Time & Style Watches — Crafted with elegance & love.</p>
 </footer>
 
 </body>

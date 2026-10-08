@@ -107,7 +107,7 @@ $conn->close();
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Wrist Win Watches - Home</title>
+<title>Time & Style Watches - Home</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="static/styling/user_styling/home.css">
 <!-- Favicon for browsers -->
@@ -201,7 +201,7 @@ $conn->close();
             <a href="contact.php">Contact Information</a>
         </div>
         <div>
-            <h3>About Wrist Win</h3>
+            <h3>About Time & Style</h3>
             <p>Luxury Watches crafted with passion and precision. Experience timeless elegance for Men & Women.</p>
         </div>
         <div>
@@ -213,7 +213,7 @@ $conn->close();
             <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
-    <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
+    <p>© 2025 Time & Style Watches — Crafted with elegance & love.</p>
 </footer>
 
 <script>

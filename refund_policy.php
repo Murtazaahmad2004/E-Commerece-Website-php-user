@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Return & Refund Policy - Wrist Win Watches</title>
+      <title>Return & Refund Policy - Time & Style Watches</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
       <link rel="stylesheet" href="static/styling/user_styling/refund_policy.css" />
       <link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.png">
@@ -31,7 +31,7 @@
       <!-- 🌸 Return & Refund Policy Section -->
       <div class="policy">
          <h1>Return & Refund Policy</h1>
-         <p><i class="fa-solid fa-rotate-left"></i> At Wrist Win Watches, customer satisfaction is our top priority.</p>
+         <p><i class="fa-solid fa-rotate-left"></i> At Time & Style Watches, customer satisfaction is our top priority.</p>
          <p>If you receive a damaged or incorrect product, please contact us within <strong>3-6 business days</strong> of delivery for an exchange or refund.</p>
          <p>Items must be unused, unopened, and in their original packaging to qualify for a return.</p>
          <p>Refunds will be processed once the returned product is received and inspected.</p>
@@ -51,9 +51,9 @@
             <a href="contact.php">Contact Information</a>
         </div>
 
-        <!-- About Wrist Win -->
+        <!-- About Time & Style -->
         <div>
-            <h3>About Wrist Win</h3>
+            <h3>About Time & Style</h3>
             <p>Luxury Watches crafted with passion and precision. Experience timeless elegance for Men & Women.</p>
         </div>
 
@@ -67,7 +67,7 @@
             <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
-    <p>© 2025 Wrist Win Watches — Crafted with elegance & love.</p>
+    <p>© 2025 Time & Style Watches — Crafted with elegance & love.</p>
 </footer>
 
 
