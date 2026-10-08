@@ -74,28 +74,28 @@ $watches_sql = "SELECT * FROM watches";
 $watches_result = $conn->query($watches_sql);
 
 $watches = [];
-$upload_base_url = "https://wristwin.shop/admin/";
 
-if ($watches_result->num_rows > 0) {
+if ($watches_result && $watches_result->num_rows > 0) {
     while ($row = $watches_result->fetch_assoc()) {
 
-        // --- Image Handling ---
-        if (!empty($row['image'])) {
-            $row['image'] = $upload_base_url . $row['image'];
-        } else {
-            $row['image'] = $upload_base_url . "default.png";
+        // Image URL is already stored in the database
+        // (Supabase public URL)
+        if (empty($row['image'])) {
+            $row['image'] = "static/default.png";
         }
 
-        // --- Discount Handling ---
-        if ($active_sale) {
-            $discount_percent = $active_sale['discount_percent'];
-            $row['discount'] = $discount_percent;
-            $row['discounted_price'] = round($row['price'] * (1 - $discount_percent / 100), 2);
-            $row['sale'] = ($row['stock'] > 0);
+        if ($active_sale && isset($active_sale['discount_percent'])) {
+            $discount = $active_sale['discount_percent'];
+
+            $row['discounted_price'] = round(
+                $row['price'] * (1 - $discount / 100),
+                2
+            );
+
+            $row['discount'] = $discount;
         } else {
             $row['discounted_price'] = null;
             $row['discount'] = 0;
-            $row['sale'] = false;
         }
 
         $watches[] = $row;
