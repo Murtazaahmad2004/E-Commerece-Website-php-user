@@ -111,21 +111,13 @@ $conn->close();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="static/styling/user_styling/home.css">
 <!-- Favicon for browsers -->
-<link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://wristwin.shop/static/icon.png">
 
-<!-- Apple Touch Icon for iOS -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://wristwin.shop/static/icon.png">
-
-<!-- Optional: Safari pinned tab -->
-<link rel="mask-icon" href="https://wristwin.shop/static/icon.svg" color="#0072ff">
-
+<link rel="icon" type="image/png" sizes="32x32" href="/static/icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/icon.png">
 </head>
 <body>
-
 <!-- Navbar -->
-
-
 <nav class="nav">
     <div class="nav-left">
         <a href="/"><img class="logo" src="static/logo.webp" alt="wrist-win"></a>
