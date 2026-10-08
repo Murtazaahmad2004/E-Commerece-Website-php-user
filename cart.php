@@ -51,18 +51,18 @@
             </div>
             <div>
                 <h3>Follow Us</h3>
-                <a href="https://wa.me/923231508088" target="_blank" style="color:#25D366;"><i
+                <a href="https://wa.me/923372513067" target="_blank" style="color:#25D366;"><i
                         class="fab fa-whatsapp"></i> Whatsapp</a>
-                <a href="https://www.instagram.com/wristwin" target="_blank" style="color:#E1306C;"><i
+                <a href="#" target="_blank" style="color:#E1306C;"><i
                         class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://www.facebook.com/share/1ANaokHvx8/?mibextid=wwXIfr" target="_blank"
+                <a href="#" target="_blank"
                     style="color:#1877F2;"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="https://www.tiktok.com/@wristwin" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-                <a href="mailto:businessinfo.pk47@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i>
                     Gmail</a>
             </div>
         </div>
-        <p>© 2025 Time & Style Watches — Crafted with elegance & love.</p>
+        <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
     </footer>
 
     <script>
