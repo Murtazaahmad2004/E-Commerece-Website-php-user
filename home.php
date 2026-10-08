@@ -112,9 +112,9 @@ $conn->close();
 <link rel="stylesheet" href="static/styling/user_styling/home.css">
 <!-- Favicon for browsers -->
 
-<link rel="icon" type="image/png" sizes="32x32" href="/static/icon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/static/icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/static/icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/icon.webp">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/icon.webp">
 </head>
 <body>
 <!-- Navbar -->
