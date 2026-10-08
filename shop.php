@@ -113,8 +113,9 @@ $conn->close();
     <title>Shop - Time & Style Watches</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/styling/user_styling/shop.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://wristwin.shop/static/icon.webp">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://wristwin.shop/static/icon.webp">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/icon.webp">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/icon.webp">
 </head>
 
 <body>
