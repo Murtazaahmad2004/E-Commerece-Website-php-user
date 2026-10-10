@@ -11,7 +11,7 @@ if ($saleResult) {
 }
 
 $discount = $sale ? (float)$sale['discount_percent'] : 0;
-$result = $conn->query("SELECT id, name, price, stock, image, description, category FROM watches ORDER BY id DESC");
+$result = $conn->query("SELECT id, name, price, stock, image, description, category FROM product ORDER BY id DESC");
 
 $data = [];
 if ($result) {

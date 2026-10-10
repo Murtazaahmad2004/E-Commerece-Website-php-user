@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Terms of Services - Time & Style Watches</title>
+      <title>Terms of Services - Glamaura product</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
       <link rel="stylesheet" href="static/styling/user_styling/term_services.css" />
       <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
@@ -31,11 +31,11 @@
       <!-- 📜 Terms of Services -->
       <div class="policy">
          <h1>Terms of Services</h1>
-         <p><i class="fa-solid fa-scale-balanced"></i> Welcome to Time & Style Watches!</p>
+         <p><i class="fa-solid fa-scale-balanced"></i> Welcome to Glamaura product!</p>
          <p>By accessing or using our website, you agree to the terms and conditions described below. Please read them carefully before making a purchase.</p>
          
          <h2>1. General</h2>
-         <p>These terms apply to all visitors, users, and customers of Time & Style Watches. By using this website, you accept our terms, policies, and guidelines.</p>
+         <p>These terms apply to all visitors, users, and customers of Glamaura product. By using this website, you accept our terms, policies, and guidelines.</p>
          
          <h2>2. Product Availability</h2>
          <p>All products listed are subject to availability. We reserve the right to modify, update, or discontinue any product at any time without notice.</p>
@@ -69,8 +69,8 @@
             </div>
 
             <div>
-               <h3>About Time & Style</h3>
-               <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+               <h3>About Glamaura</h3>
+               <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
             </div>
 
             <div>
@@ -83,7 +83,7 @@
             </div>
          </div>
 
-         <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+         <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
       </footer>
 
       <script>

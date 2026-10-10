@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - Time & Style</title>
+    <title>Cart - Glamaura</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/styling/user_styling/cart.css">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
@@ -47,8 +47,8 @@
                 <a href="contact.php">Contact Information</a>
             </div>
             <div>
-                <h3>About Time & Style</h3>
-                <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+                <h3>About Glamaura</h3>
+                <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
             </div>
             <div>
                 <h3>Follow Us</h3>
@@ -63,7 +63,7 @@
                     Gmail</a>
             </div>
         </div>
-        <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+        <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
     </footer>
 
     <script>

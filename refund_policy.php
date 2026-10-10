@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Return & Refund Policy - Time & Style Watches</title>
+      <title>Return & Refund Policy - Glamaura product</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
       <link rel="stylesheet" href="static/styling/user_styling/refund_policy.css" />
       <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
@@ -32,7 +32,7 @@
       <!-- 🌸 Return & Refund Policy Section -->
       <div class="policy">
          <h1>Return & Refund Policy</h1>
-         <p><i class="fa-solid fa-rotate-left"></i> At Time & Style Watches, customer satisfaction is our top priority.</p>
+         <p><i class="fa-solid fa-rotate-left"></i> At Glamaura product, customer satisfaction is our top priority.</p>
          <p>If you receive a damaged or incorrect product, please contact us within <strong>3-6 business days</strong> of delivery for an exchange or refund.</p>
          <p>Items must be unused, unopened, and in their original packaging to qualify for a return.</p>
          <p>Refunds will be processed once the returned product is received and inspected.</p>
@@ -52,10 +52,10 @@
             <a href="contact.php">Contact Information</a>
         </div>
 
-        <!-- About Time & Style -->
+        <!-- About Glamaura -->
         <div>
-            <h3>About Time & Style</h3>
-            <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+            <h3>About Glamaura</h3>
+            <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
         </div>
 
         <!-- Follow Us -->
@@ -68,7 +68,7 @@
             <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
-    <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+    <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
 </footer>
 
 

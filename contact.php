@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Time & Style Watches</title>
+    <title>Contact Us - Glamaura product</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/styling/user_styling/contact.css">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
@@ -31,7 +31,7 @@
 <!-- Contact Info -->
 <div class="contact">
     <h1>Contact Information</h1>
-    <p><i class="fa-solid fa-user"></i> Brand Name: <strong>Time & Style</strong></p>
+    <p><i class="fa-solid fa-user"></i> Brand Name: <strong>Glamaura</strong></p>
     <p><i class="fa-solid fa-phone"></i> Phone: <strong>+92 337-2513067</strong></p>
     <p><i class="fa-solid fa-envelope"></i> Email: <strong>#</strong></p>
     <br>
@@ -53,8 +53,8 @@
         </div>
 
         <div>
-            <h3>About Time & Style</h3>
-            <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+            <h3>About Glamaura</h3>
+            <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
         </div>
 
         <div>
@@ -66,7 +66,7 @@
             <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
-    <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+    <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
 </footer>
 
 </body>

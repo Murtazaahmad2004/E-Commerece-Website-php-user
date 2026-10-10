@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             $price = $_POST['price'] ?? 0;
             $description = $_POST['description'] ?? '';
 
-            $stmt = $conn->prepare("INSERT INTO watches (name, price, description, image) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO product (name, price, description, image) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sdss", $name, $price, $description, $new_name);
             $stmt->execute();
         } else {
@@ -69,14 +69,14 @@ $active_sale_sql = "SELECT * FROM sales WHERE status='active' LIMIT 1";
 $active_sale_result = $conn->query($active_sale_sql);
 $active_sale = $active_sale_result->fetch_assoc();
 
-// 2️⃣ Get all watches
-$watches_sql = "SELECT * FROM watches";
-$watches_result = $conn->query($watches_sql);
+// 2️⃣ Get all product
+$product_sql = "SELECT * FROM product";
+$product_result = $conn->query($product_sql);
 
-$watches = [];
+$product = [];
 
-if ($watches_result && $watches_result->num_rows > 0) {
-    while ($row = $watches_result->fetch_assoc()) {
+if ($product_result && $product_result->num_rows > 0) {
+    while ($row = $product_result->fetch_assoc()) {
 
         // Image URL is already stored in the database
         // (Supabase public URL)
@@ -98,7 +98,7 @@ if ($watches_result && $watches_result->num_rows > 0) {
             $row['discount'] = 0;
         }
 
-        $watches[] = $row;
+        $product[] = $row;
     }
 }
 
@@ -110,7 +110,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Time & Style Watches</title>
+    <title>Shop - Glamaura product</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="static/styling/user_styling/shop.css">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
@@ -126,7 +126,7 @@ $conn->close();
         </div> 
          <div class="nav-controls">
             <div class="nav-search">
-               <input type="text" id="search-input" placeholder="Search watches..." onkeyup="searchWatches()" />
+               <input type="text" id="search-input" placeholder="Search product..." onkeyup="searchproduct()" />
                <button><i class="fa fa-search"></i></button>
             </div>
          </div>
@@ -144,8 +144,8 @@ $conn->close();
 
     <!-- Header -->
     <section class="shop-header">
-        <h1>Shop Our Watches</h1>
-        <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+        <h1>Shop Our product</h1>
+        <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
 
         <?php if ($active_sale && isset($active_sale['sale_name'], $active_sale['discount_percent'])): ?>
         <h2 class="gradient-text">
@@ -166,7 +166,7 @@ $conn->close();
     <section class="product-section">
         <div class="product-grid">
 
-            <?php foreach ($watches as $watch): ?>
+            <?php foreach ($product as $watch): ?>
                 <div class="product-card" data-category="<?= strtolower($watch['category']) ?>">
 
                     <!-- BADGES -->
@@ -220,8 +220,8 @@ $conn->close();
                   <a href="contact.php">Contact Information</a>
             </div>
             <div>
-               <h3>About Time & Style</h3>
-               <p>Luxury Watches crafted with passion and purity. Experience timeless for Men & Women.</p>
+               <h3>About Glamaura</h3>
+               <p>Luxury product crafted with passion and purity. Experience timeless for Men & Women.</p>
             </div>
             <div>
                 <h3>Follow Us</h3>
@@ -232,7 +232,7 @@ $conn->close();
                 <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
             </div>
          </div>
-          <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+          <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
       </footer>
       <script>
          const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -275,7 +275,7 @@ function addToCart(id, name, original_price, discounted_price, image, stock) {
     }, 600);
 }
 
-         function searchWatches() {
+         function searchproduct() {
            const input = document.getElementById("search-input").value.toLowerCase();
            document.querySelectorAll(".product-card").forEach(card => {
              const name = card.querySelector(".product-name").textContent.toLowerCase();

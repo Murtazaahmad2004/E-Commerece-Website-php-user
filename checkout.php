@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Fetch product data from DB
     $ids = array_column($cart, 'id');
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
-    $stmt = $conn->prepare("SELECT id, name, price, stock FROM watches WHERE id IN ($placeholders)");
+    $stmt = $conn->prepare("SELECT id, name, price, stock FROM product WHERE id IN ($placeholders)");
     $stmt->bind_param(str_repeat("i", count($ids)), ...$ids);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $qty = intval($item['quantity']);
             $new_stock = $products[$pid]['stock'] - $qty;
 
-            $update_stmt = $conn->prepare("UPDATE watches SET stock = ? WHERE id = ?");
+            $update_stmt = $conn->prepare("UPDATE product SET stock = ? WHERE id = ?");
             $update_stmt->bind_param("ii", $new_stock, $pid);
             $update_stmt->execute();
         }
@@ -163,7 +163,7 @@ Please confirm the order."
 
         $whatsapp_url = "https://wa.me/$admin_phone?text=$whatsapp_message";
 
-        $subject = "New Order Received - Time & Style Watches";
+        $subject = "New Order Received - Glamaura product";
         $email_body = "
 A new order has been placed.
 
@@ -185,7 +185,7 @@ Payment Method: Cash on Delivery
 Sale Status: $sale_status
 ";
 
-        $headers = "From: Time & Style <no-reply@wristwin.com>\r\n";
+        $headers = "From: Glamaura <no-reply@wristwin.com>\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
         @mail($admin_email, $subject, $email_body, $headers);
@@ -214,7 +214,7 @@ $conn->close();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout - Time & Style Watches</title>
+  <title>Checkout - Glamaura product</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="static/styling/user_styling/checkout.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/icon.webp">
@@ -341,10 +341,10 @@ $conn->close();
                   <a href="contact.php">Contact Information</a>
             </div>
 
-            <!-- Center: About Time & Style -->
+            <!-- Center: About Glamaura -->
             <div>
-                  <h3>About Time & Style</h3>
-                  <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+                  <h3>About Glamaura</h3>
+                  <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
             </div>
 
             <!-- Right: Follow Us -->
@@ -357,7 +357,7 @@ $conn->close();
                   <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
             </div>
          </div>
-         <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+         <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
       </footer>
 
 <script>

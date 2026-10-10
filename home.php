@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             $price = $_POST['price'] ?? 0;
             $description = $_POST['description'] ?? '';
 
-            $stmt = $conn->prepare("INSERT INTO watches (name, price, description, image) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO product (name, price, description, image) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sdss", $name, $price, $description, $new_name);
             $stmt->execute();
         }
@@ -66,14 +66,14 @@ $active_sale_query = "SELECT * FROM sales WHERE status='active' LIMIT 1";
 $active_sale_result = $conn->query($active_sale_query);
 $active_sale = $active_sale_result ? $active_sale_result->fetch_assoc() : null;
 
-// --- GET ALL WATCHES ---
-$watches_query = "SELECT * FROM watches";
-$watches_result = $conn->query($watches_query);
+// --- GET ALL product ---
+$product_query = "SELECT * FROM product";
+$product_result = $conn->query($product_query);
 
-$watches = [];
+$product = [];
 
-if ($watches_result && $watches_result->num_rows > 0) {
-    while ($row = $watches_result->fetch_assoc()) {
+if ($product_result && $product_result->num_rows > 0) {
+    while ($row = $product_result->fetch_assoc()) {
 
         // Image URL is already stored in the database
         // (Supabase public URL)
@@ -95,7 +95,7 @@ if ($watches_result && $watches_result->num_rows > 0) {
             $row['discount'] = 0;
         }
 
-        $watches[] = $row;
+        $product[] = $row;
     }
 }
 
@@ -107,7 +107,7 @@ $conn->close();
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Time & Style Watches - Home</title>
+<title>Glamaura product - Home</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="static/styling/user_styling/home.css">
 <!-- Favicon for browsers -->
@@ -159,8 +159,8 @@ $conn->close();
 
 <section class="products">
     <div class="product-grid">
-        <?php if (count($watches) > 0): ?>
-            <?php foreach($watches as $watch): ?>
+        <?php if (count($product) > 0): ?>
+            <?php foreach($product as $watch): ?>
                 <div class="product-card">
                     <div class="image-container">
                         <?php if ($watch['discounted_price']): ?>
@@ -184,7 +184,7 @@ $conn->close();
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p style="color:#ffffff;">No watches available yet.</p>
+            <p style="color:#ffffff;">No product available yet.</p>
         <?php endif; ?>
     </div>
 </section>
@@ -201,8 +201,8 @@ $conn->close();
             <a href="contact.php">Contact Information</a>
         </div>
         <div>
-            <h3>About Time & Style</h3>
-            <p>Watches, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+            <h3>About Glamaura</h3>
+            <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
         </div>
         <div>
             <h3>Follow Us</h3>
@@ -213,7 +213,7 @@ $conn->close();
             <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
-    <p>© 2026 Time & Style Watches — Crafted with elegance & love.</p>
+    <p>© 2026 Glamaura product — Crafted with elegance & love.</p>
 </footer>
 
 <script>

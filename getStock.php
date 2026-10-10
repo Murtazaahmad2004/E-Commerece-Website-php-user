@@ -63,7 +63,7 @@ $saleRow = $saleResult ? $saleResult->fetch_assoc() : null;
 $discount = $saleRow ? (int)$saleRow['discount_percent'] : 0;
 
 /* -------- PRODUCTS -------- */
-$query = "SELECT id, name, price, stock, image FROM watches WHERE id IN ($idList)";
+$query = "SELECT id, name, price, stock, image FROM product WHERE id IN ($idList)";
 $result = $conn->query($query);
 
 $data = [];
