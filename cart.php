@@ -54,6 +54,7 @@
                 <h3>Follow Us</h3>
                 <a href="https://wa.me/923372513067" target="_blank" style="color:#25D366;"><i
                         class="fab fa-whatsapp"></i> Whatsapp</a>
+                <a href="https://wa.me/923712421804" target="_blank" style="color:#25D366;"><i class="fab fa-whatsapp"></i> Whatsapp</a>
                 <a href="#" target="_blank" style="color:#E1306C;"><i
                         class="fab fa-instagram"></i> Instagram</a>
                 <a href="#" target="_blank"
