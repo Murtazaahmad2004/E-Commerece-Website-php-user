@@ -33,6 +33,7 @@
     <h1>Contact Information</h1>
     <p><i class="fa-solid fa-user"></i> Brand Name: <strong>Glamaura</strong></p>
     <p><i class="fa-solid fa-phone"></i> Phone: <strong>+92 337-2513067</strong></p>
+    <p><i class="fa-solid fa-phone"></i> Phone: <strong>+92 371-2421804</strong></p>
     <p><i class="fa-solid fa-envelope"></i> Email: <strong>#</strong></p>
     <br>
     <p>We’re happy to assist you with your orders, watch details, or collaborations.<br>
