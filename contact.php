@@ -34,7 +34,7 @@
     <p><i class="fa-solid fa-user"></i> Brand Name: <strong>Glamaura</strong></p>
     <p><i class="fa-solid fa-phone"></i> Phone: <strong>+92 337-2513067</strong></p>
     <p><i class="fa-solid fa-phone"></i> Phone: <strong>+92 371-2421804</strong></p>
-    <p><i class="fa-solid fa-envelope"></i> Email: <strong>#</strong></p>
+    <p><i class="fa-solid fa-envelope"></i> Email: <strong>glamauraastore@gmail.com</strong></p>
     <br>
     <p>We’re happy to assist you with your orders, watch details, or collaborations.<br>
        Feel free to reach out — we usually respond within 24 hours.
@@ -64,7 +64,7 @@
             <a href="#" target="_blank" style="color:#E1306C;"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="#" target="_blank" style="color:#1877F2;"><i class="fab fa-facebook"></i> Facebook</a>
             <a href="#" target="_blank" style="color:#ffffff;"><i class="fab fa-tiktok"></i> TikTok</a>
-            <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
+            <a href="mailto: glamauraastore@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i> Gmail</a>
         </div>
     </div>
     <p>© 2026 Glamaura product — Crafted with elegance & love.</p>

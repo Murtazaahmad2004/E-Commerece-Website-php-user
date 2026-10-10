@@ -59,7 +59,7 @@
                 <a href="#" target="_blank"
                     style="color:#1877F2;"><i class="fab fa-facebook"></i> Facebook</a>
                 <a href="#" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-                <a href="mailto:#" style="color:#D14836;"><i class="fa-solid fa-envelope"></i>
+                <a href="mailto: glamauraastore@gmail.com" style="color:#D14836;"><i class="fa-solid fa-envelope"></i>
                     Gmail</a>
             </div>
         </div>
