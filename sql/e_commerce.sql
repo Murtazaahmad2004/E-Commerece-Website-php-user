@@ -1,4 +1,4 @@
-CREATE TABLE watches (
+CREATE TABLE product (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     image VARCHAR(200) DEFAULT 'default.jpg',
