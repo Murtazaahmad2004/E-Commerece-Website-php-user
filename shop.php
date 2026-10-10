@@ -221,7 +221,7 @@ $conn->close();
             </div>
             <div>
                <h3>About Glamaura</h3>
-               <p>Luxury product crafted with passion and purity. Experience timeless for Men & Women.</p>
+               <p>Beauty, skincare, makeup & more — discover your beauty, enhance your glow, all in one place.</p>
             </div>
             <div>
                 <h3>Follow Us</h3>
