@@ -202,7 +202,7 @@ $conn->close();
         </div>
         <div>
             <h3>About Glamaura</h3>
-            <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+            <p>Beauty, skincare, makeup & more — discover your beauty, enhance your glow, all in one place.</p>
         </div>
         <div>
             <h3>Follow Us</h3>

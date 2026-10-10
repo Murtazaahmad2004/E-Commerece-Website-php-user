@@ -145,7 +145,7 @@ $conn->close();
     <!-- Header -->
     <section class="shop-header">
         <h1>Shop Our product</h1>
-        <p>product, eyewear, fashion accessories & more — quality products, great style, all in one place.</p>
+        <p>Beauty, skincare, makeup & more — discover your beauty, enhance your glow, all in one place.</p>
 
         <?php if ($active_sale && isset($active_sale['sale_name'], $active_sale['discount_percent'])): ?>
         <h2 class="gradient-text">
